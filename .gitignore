@@ -1,0 +1,5 @@
+# Jet-Brains specific
+.idea/*
+
+# Mac specific
+.DS_Store
