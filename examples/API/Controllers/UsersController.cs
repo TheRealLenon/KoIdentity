@@ -166,18 +166,11 @@ public class UsersController : ControllerBase
     {
         var selectionResult = await UserStore.FindByIdAsync(id);
 
-        var users = new User
-        {
-            Username = "ABC",
-            Password = "SSD"
-        };
-
         if (!selectionResult.State || selectionResult.Payload is not User user)
         {
             return NotFound(id);
         }
 
-        userPatch.ApplyTo(users);
         userPatch.ApplyTo(user);
 
         var updateResult = await UserStore.UpdateAsync(user);
