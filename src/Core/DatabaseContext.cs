@@ -30,6 +30,12 @@ public class DatabaseContext : DatabaseContext<User>
         modelBuilder.Entity<User>().BuildUniqueSqlIndex(u => u.Username);
 
         modelBuilder.Entity<Role>().BuildDefaultSqlEntity().BuildUniqueSqlIndex(r => r.Name);
+
+        modelBuilder.Entity<UserRole>().BuildDefaultSqlEntity().BuildUniqueSqlIndex(r =>
+            new
+            {
+                r.UserId, r.RoleId
+            });
         
         base.OnModelCreating(modelBuilder);
     }
@@ -52,6 +58,11 @@ public class DatabaseContext : DatabaseContext<User>
     /// Gets or sets the <see cref="DbSet{TEntity}"/> of roles.
     /// </summary>
     public DbSet<Role> Roles { get; set; }
+    
+    /// <summary>
+    /// Gets or sets the <see cref="DbSet{TEntity}"/> of user roles.
+    /// </summary>
+    public DbSet<UserRole> UserRoles { get; set; }
 
 #nullable restore
 

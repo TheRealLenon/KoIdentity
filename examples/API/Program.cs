@@ -10,6 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers().AddNewtonsoftJson();
 
+builder.Services.AddSingleton<UserRoleValidator>();
+builder.Services.AddTransient<IUserRoleStore, UserRoleStore>();
+
 builder.Services.AddSingleton<RoleValidator>();
 builder.Services.AddTransient<IRoleStore, RoleStore>();
 
