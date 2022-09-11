@@ -4,6 +4,7 @@ using Microsoft.OpenApi.Models;
 using Tekoding.KoIdentity.Core;
 using Tekoding.KoIdentity.Core.Stores;
 using Tekoding.KoIdentity.Core.Validations;
+using Tekoding.KoIdentity.Web.Authentications;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -89,6 +90,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<JwtMiddleware>();
 
 app.UseHttpsRedirection();
 

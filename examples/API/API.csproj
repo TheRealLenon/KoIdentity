@@ -16,13 +16,14 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
         <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="6.0.8" />
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.8" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\..\src\Core\Core.csproj" />
+      <ProjectReference Include="..\..\src\Web\Web.csproj" />
     </ItemGroup>
 
 </Project>

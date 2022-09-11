@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Tekoding.KoIdentity.Core.Models;
 using Tekoding.KoIdentity.Core.Models.Dtos;
 using Tekoding.KoIdentity.Core.Stores;
+using Tekoding.KoIdentity.Web.Authentications;
 
 namespace Tekoding.KoIdentity.Examples.API.Controllers;
 
@@ -12,6 +13,7 @@ namespace Tekoding.KoIdentity.Examples.API.Controllers;
 /// </summary>
 [ApiController]
 [Route("[controller]")]
+[Authorize]
 public class RolesController : ControllerBase
 {
     private IRoleStore RoleStore { get; }

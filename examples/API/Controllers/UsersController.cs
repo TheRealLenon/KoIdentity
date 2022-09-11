@@ -53,7 +53,7 @@ public class UsersController : ControllerBase
         var user = new User
         {
             Username = creationDto.Username,
-            Password = creationDto.Password,
+            Password = BCrypt.Net.BCrypt.HashPassword(creationDto.Password),
         };
         
         var operationResult = await UserStore.CreateAsync(user);
