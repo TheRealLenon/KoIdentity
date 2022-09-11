@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abstraction", "src\Abstract
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abstraction.Test", "test\Abstraction.Test\Abstraction.Test.csproj", "{EF60E907-132A-4E93-8FAB-F33138BF7C63}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Abstraction", "Abstraction", "{74820748-DC17-4649-96ED-AEA27600145F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "src\Core\Core.csproj", "{EA61D25B-A30E-446F-8C72-BA872A088D34}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{EF60E907-132A-4E93-8FAB-F33138BF7C63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF60E907-132A-4E93-8FAB-F33138BF7C63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF60E907-132A-4E93-8FAB-F33138BF7C63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA61D25B-A30E-446F-8C72-BA872A088D34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA61D25B-A30E-446F-8C72-BA872A088D34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA61D25B-A30E-446F-8C72-BA872A088D34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA61D25B-A30E-446F-8C72-BA872A088D34}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8E419D1E-46C4-410D-8EA3-5B7F14D77FFC} = {74820748-DC17-4649-96ED-AEA27600145F}
+		{EF60E907-132A-4E93-8FAB-F33138BF7C63} = {74820748-DC17-4649-96ED-AEA27600145F}
 	EndGlobalSection
 EndGlobal
