@@ -10,7 +10,7 @@ namespace Tekoding.KoIdentity.Abstraction.Stores;
 public interface IEntityStore<in TEntity> where TEntity : Entity
 {
     /// <summary>
-    /// Creates the specified <typeparamref name="TEntity"/> in the backing store, as an asynchronous operation.
+    /// Creates the specified <typeparamref name="TEntity"/> in the backing store, as an asynchronous operation
     /// </summary>
     /// <param name="entity">The <typeparamref name="TEntity"/> to create.</param>
     /// <param name="cancellationToken">
@@ -21,6 +21,19 @@ public interface IEntityStore<in TEntity> where TEntity : Entity
     /// <see cref="OperationResult"/> indicating, if the creation succeeded or not.
     /// </returns>
     public Task<OperationResult> CreateAsync(TEntity entity, CancellationToken cancellationToken = default);
+    
+    /// <summary>
+    /// Updates the specified <typeparamref name="TEntity"/> in the backing store, as an asynchronous operation.
+    /// </summary>
+    /// <param name="entity">The <typeparamref name="TEntity"/> to update.</param>
+    /// <param name="cancellationToken">
+    /// The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.
+    /// </param>
+    /// <returns>
+    /// The <see cref="Task{TResult}"/> that represents the asynchronous operation, containing the
+    /// <see cref="OperationResult"/> indicating, if the update succeeded or not.
+    /// </returns>
+    public Task<OperationResult> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default);
     
     /// <summary>
     /// Deletes the specified <typeparamref name="TEntity"/> from the backing store, as an asynchronous operation.
@@ -36,6 +49,18 @@ public interface IEntityStore<in TEntity> where TEntity : Entity
     public Task<OperationResult> DeleteAsync(TEntity entity, CancellationToken cancellationToken = default);
     
     /// <summary>
+    /// Gets all <typeparamref name="TEntity"/>s from the backing store, as an asynchronous operation.
+    /// </summary>
+    /// <param name="cancellationToken">
+    /// The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.
+    /// </param>
+    /// <returns>
+    /// The <see cref="Task{TResult}"/> that represents the asynchronous operation, containing the
+    /// <see cref="OperationResult"/> including a list of all existing <typeparamref name="TEntity"/>s, if any.
+    /// </returns>
+    public Task<OperationResult> GetAllAsync(CancellationToken cancellationToken = default);
+    
+    /// <summary>
     /// Finds a single <typeparamref name="TEntity"/> located in the backing store, as an asynchronous operation.
     /// </summary>
     /// <param name="id">The unique identifier of the <typeparamref name="TEntity"/> to find.</param>
@@ -47,16 +72,4 @@ public interface IEntityStore<in TEntity> where TEntity : Entity
     /// <see cref="OperationResult"/> including the <typeparamref name="TEntity"/>, if any, with the provided identifier.
     /// </returns>
     public Task<OperationResult> FindByIdAsync(Guid id, CancellationToken cancellationToken = default);
-    
-    /// <summary>
-    /// Gets all <typeparamref name="TEntity"/>s from the backing store, as an asynchronous operation.
-    /// </summary>
-    /// <param name="cancellationToken">
-    /// The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.
-    /// </param>
-    /// <returns>
-    /// The <see cref="Task{TResult}"/> that represents the asynchronous operation, containing the
-    /// <see cref="OperationResult"/> including a list of all existing <typeparamref name="TEntity"/>s, if any.
-    /// </returns>
-    public Task<OperationResult> GetAllAsync(CancellationToken cancellationToken = default);
 }

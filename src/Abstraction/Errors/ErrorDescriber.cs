@@ -11,10 +11,10 @@ namespace Tekoding.KoIdentity.Abstraction.Errors;
 public static class ErrorDescriber
 {
     /// <summary>
-    /// Describes an <see cref="Error"/> indicating an <b>ObjectNullFailure</b>
+    /// Describes an <see cref="Error"/> indicating an <b>ObjectNullFailure</b>.
     /// </summary>
     /// <returns>
-    /// Returns an <see cref="Error"/> indicating that an operation failed because the object does not point into
+    /// Returns an <see cref="Error"/> indicating, that an operation failed because the object does not point into
     /// memory.
     /// </returns>
     public static Error ObjectNullFailure() => new()
@@ -34,18 +34,42 @@ public static class ErrorDescriber
         Code = nameof(ObjectInvalidFailure),
         Description = ErrorResources.ObjectInvalidFailure
     };
-
+    
     /// <summary>
-    /// Describes an <see cref="Error"/> indicating an <b>DatabaseCreationFailure</b>
+    /// Describes an <see cref="Error"/> indicating an <b>ObjectStateUnmodifiedFailure</b>.
     /// </summary>
     /// <returns>
-    /// Returns an <see cref="Error"/> indicating that an operation failed because the object could not be created in
-    /// the database.
+    /// Returns an <see cref="Error"/> indicating, that an operation failed because the object does whether not exist or
+    /// has tracked changes.
+    /// </returns>
+    public static Error ObjectStateUnmodifiedFailure() => new()
+    {
+        Code = nameof(ObjectStateUnmodifiedFailure),
+        Description = ErrorResources.ObjectStateUnmodifiedFailure
+    };
+    
+    /// <summary>
+    /// Describes an <see cref="Error"/> indicating a <b>DatabaseCreationFailure</b>.
+    /// </summary>
+    /// <returns>
+    /// Returns an <see cref="Error"/> indicating, that an object could not be created in the database.
     /// </returns>
     public static Error DatabaseCreationFailure() => new()
     {
         Code = nameof(DatabaseCreationFailure),
         Description = ErrorResources.DatabaseCreationFailure
+    };
+    
+    /// <summary>
+    /// Describes an <see cref="Error"/> indicating an <b>DatabaseUpdateFailure</b>.
+    /// </summary>
+    /// <returns>
+    /// Returns an <see cref="Error"/> indicating, that an object could not be updated in the database.
+    /// </returns>
+    public static Error DatabaseUpdateFailure() => new()
+    {
+        Code = nameof(DatabaseUpdateFailure),
+        Description = ErrorResources.DatabaseUpdateFailure
     };
     
     /// <summary>

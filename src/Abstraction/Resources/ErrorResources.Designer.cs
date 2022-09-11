@@ -74,5 +74,17 @@ namespace Tekoding.KoIdentity.Abstraction.Resources {
                 return ResourceManager.GetString("DatabaseSelectionFailure", resourceCulture);
             }
         }
+        
+        internal static string ObjectStateUnmodifiedFailure {
+            get {
+                return ResourceManager.GetString("ObjectStateUnmodifiedFailure", resourceCulture);
+            }
+        }
+        
+        internal static string DatabaseUpdateFailure {
+            get {
+                return ResourceManager.GetString("DatabaseUpdateFailure", resourceCulture);
+            }
+        }
     }
 }

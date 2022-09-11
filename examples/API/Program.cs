@@ -8,6 +8,7 @@ using Tekoding.KoIdentity.Core.Validations;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddSingleton<UserValidator>();
 builder.Services.AddTransient<IUserStore, UserStore>();
 builder.Services.AddDbContext<DbContext, DatabaseContext>(optionsAction => optionsAction.UseSqlServer(
