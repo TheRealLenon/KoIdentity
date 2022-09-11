@@ -47,4 +47,16 @@ public interface IEntityStore<in TEntity> where TEntity : Entity
     /// <see cref="OperationResult"/> including the <typeparamref name="TEntity"/>, if any, with the provided identifier.
     /// </returns>
     public Task<OperationResult> FindByIdAsync(Guid id, CancellationToken cancellationToken = default);
+    
+    /// <summary>
+    /// Gets all <typeparamref name="TEntity"/>s from the backing store, as an asynchronous operation.
+    /// </summary>
+    /// <param name="cancellationToken">
+    /// The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.
+    /// </param>
+    /// <returns>
+    /// The <see cref="Task{TResult}"/> that represents the asynchronous operation, containing the
+    /// <see cref="OperationResult"/> including a list of all existing <typeparamref name="TEntity"/>s, if any.
+    /// </returns>
+    public Task<OperationResult> GetAllAsync(CancellationToken cancellationToken = default);
 }
