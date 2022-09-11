@@ -24,4 +24,13 @@
     <data name="DatabaseCreationFailure" xml:space="preserve">
         <value>There was an error creating the object in the database.</value>
     </data>
+    <data name="DatabaseDeletionFailure" xml:space="preserve">
+        <value>here was an error deleting the object from the database.</value>
+    </data>
+    <data name="ObjectInvalidFailure" xml:space="preserve">
+        <value>The operation failed, because the object is not valid.</value>
+    </data>
+    <data name="DatabaseSelectionFailure" xml:space="preserve">
+        <value>There was an error selecting the object from the database.</value>
+    </data>
 </root>

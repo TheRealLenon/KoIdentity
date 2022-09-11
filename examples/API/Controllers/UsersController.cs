@@ -67,4 +67,44 @@ public class UsersController : ControllerBase
 
         return CreatedAtAction(nameof(Post), user.Id);
     }
+    
+    /// <summary>
+    /// Deletes a single user.
+    /// </summary>
+    /// <returns>The user to delete.</returns>
+    /// <response code="200">Returns an status indicating that the removal of the user with the provided <paramref name="id"/> succeeded.</response>
+    /// <response code="404">
+    /// Returns a information, that the deletion failed, because no user with the <paramref name="id"/> was found.
+    /// </response>
+    /// <response code="500">Returns an information, that the deletion failed due to an internal server error.</response>
+    /// <remarks>
+    /// Sample request:
+    ///
+    ///     DELETE /Users/e802511d-7e23-4a19-72cf-08da30926879
+    ///
+    /// </remarks>
+    [HttpDelete("{id:guid}")]
+    [Consumes(MediaTypeNames.Application.Json)]
+    [Produces(MediaTypeNames.Application.Json)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(Guid))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        var selectionResult = await UserStore.FindByIdAsync(id);
+
+        if (!selectionResult.State || selectionResult.Payload is not User user)
+        {
+            return NotFound(id);
+        }
+
+        var deletionResult = await UserStore.DeleteAsync(user);
+
+        if (!deletionResult.State)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+
+        return Ok(id);
+    }
 }
