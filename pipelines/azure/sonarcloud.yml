@@ -1,0 +1,33 @@
+jobs:
+  - job: KoIdentitySonarCloudAnalyze
+    pool:
+      vmImage: windows-2022
+    variables:
+      - group: Tekoding
+    steps:
+      - task: SonarCloudPrepare@1
+        inputs:
+          SonarCloud: 'SonarCloud-Tekoding'
+          organization: $(TekodingKoIdentitySonarCloudOrganization)
+          scannerMode: 'MSBuild'
+          cliProjectKey: $(TekodingKoIdentitySonarCloudProjectKey)
+          projectName: 'KoIdentity'
+          projectKey: $(TekodingKoIdentitySonarCloudProjectKey)
+
+      - task: DotNetCoreCLI@2
+        inputs:
+          command: 'build'
+          projects: 'KoIdentity.sln'
+
+      - task: DotNetCoreCLI@2
+        inputs:
+          command: 'test'
+          projects: '**/*.csproj'
+          arguments: '--collect "Code Coverage"'
+
+      - task: SonarCloudAnalyze@1
+
+      - task: SonarCloudPublish@1
+        displayName: Publish Quality Gate Result
+        inputs:
+          pollingTimeoutSec: '300'

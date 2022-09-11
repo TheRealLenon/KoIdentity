@@ -1,5 +1,12 @@
-# Jet-Brains specific
-.idea/*
+# User specific Files
+*.user
 
-# Mac specific
+# Mac Related-Files
 .DS_Store
+
+# JetBrains Related-Files
+.idea/
+
+# Build results
+[Oo]bj/
+[Bb]in/
