@@ -101,4 +101,19 @@ public abstract class EntityStore<TEntity> : IEntityStore<TEntity>
             return OperationResult.Failed(ErrorDescriber.DatabaseSelectionFailure());
         }
     }
+    
+    /// <inheritdoc />
+    public async Task<OperationResult> GetAllAsync(CancellationToken cancellationToken = default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+
+        try
+        {
+            return OperationResult.SuccessWithPayload(await DbContext.Set<TEntity>().ToListAsync(cancellationToken));
+        }
+        catch (Exception)
+        {
+            return OperationResult.Failed(ErrorDescriber.DatabaseSelectionFailure());
+        }
+    }
 }

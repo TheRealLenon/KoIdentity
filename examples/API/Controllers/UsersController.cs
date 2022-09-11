@@ -107,4 +107,70 @@ public class UsersController : ControllerBase
 
         return Ok(id);
     }
+    
+    /// <summary>
+    /// Gets all users.
+    /// </summary>
+    /// <returns>A list of all users.</returns>
+    /// <response code="200">Returns an array of all existing users.</response>
+    /// <response code="500">Returns an information, that the selection failed due to an internal server error.</response>
+    /// <remarks>
+    /// Sample request:
+    ///
+    ///     Get /Users
+    ///
+    /// </remarks>
+    [HttpGet]
+    [Produces(MediaTypeNames.Application.Json)]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<User>))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> Get()
+    {
+        var operationResult = await UserStore.GetAllAsync();
+
+        if (!operationResult.State)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+
+        return Ok(operationResult.Payload as IEnumerable<User>);
+    }
+    
+    /// <summary>
+    /// Gets a single user.
+    /// </summary>
+    /// <returns>The user to be looked for.</returns>
+    /// <response code="200">Returns an user, with the assigned <paramref name="id"/>.</response>
+    /// <response code="500">Returns an information, that the selection failed due to an internal server error.</response>
+    /// <response code="404">
+    /// Returns an information, that the selection failed, because no user with the <paramref name="id"/> was found.
+    /// </response>
+    /// <remarks>
+    /// Sample request:
+    ///
+    ///     Get /Users/e802511d-7e23-4a19-72cf-08da30926879
+    ///
+    /// </remarks>
+    [HttpGet("{id:guid}")]
+    [Consumes(MediaTypeNames.Application.Json)]
+    [Produces(MediaTypeNames.Application.Json)]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(User))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(User))]
+    public async Task<IActionResult> Get(Guid id)
+    {
+        var operationResult = await UserStore.FindByIdAsync(id);
+
+        if (!operationResult.State)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+
+        if (operationResult.Payload == null || operationResult.Payload.GetType() != typeof(User))
+        {
+            return NotFound(id);
+        }
+
+        return Ok(operationResult.Payload as User);
+    }
 }
