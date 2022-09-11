@@ -22,6 +22,18 @@ public static class ErrorDescriber
         Code = nameof(ObjectNullFailure),
         Description = ErrorResources.ObjectNullFailure
     };
+    
+    /// <summary>
+    /// Describes an <see cref="Error"/> indicating an <b>ObjectInvalidFailure</b>.
+    /// </summary>
+    /// <returns>
+    /// Returns an <see cref="Error"/> indicating, that an operation failed because the provided object was not valid.
+    /// </returns>
+    public static Error ObjectInvalidFailure() => new()
+    {
+        Code = nameof(ObjectInvalidFailure),
+        Description = ErrorResources.ObjectInvalidFailure
+    };
 
     /// <summary>
     /// Describes an <see cref="Error"/> indicating an <b>DatabaseCreationFailure</b>
@@ -34,5 +46,29 @@ public static class ErrorDescriber
     {
         Code = nameof(DatabaseCreationFailure),
         Description = ErrorResources.DatabaseCreationFailure
+    };
+    
+    /// <summary>
+    /// Describes an <see cref="Error"/> indicating a <b>DatabaseDeletionFailure</b>.
+    /// </summary>
+    /// <returns>
+    /// Returns an <see cref="Error"/> indicating, that an object could not be removed from the database.
+    /// </returns>
+    public static Error DatabaseDeletionFailure() => new()
+    {
+        Code = nameof(DatabaseDeletionFailure),
+        Description = ErrorResources.DatabaseDeletionFailure
+    };
+    
+    /// <summary>
+    /// Describes an <see cref="Error"/> indicating a <b>DatabaseSelectionFailure</b>.
+    /// </summary>
+    /// <returns>
+    /// Returns an <see cref="Error"/> indicating, that an object could not be selected from the database.
+    /// </returns>
+    public static Error DatabaseSelectionFailure() => new()
+    {
+        Code = nameof(DatabaseSelectionFailure),
+        Description = ErrorResources.DatabaseSelectionFailure
     };
 }

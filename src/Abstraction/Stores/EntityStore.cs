@@ -54,4 +54,51 @@ public abstract class EntityStore<TEntity> : IEntityStore<TEntity>
         
         return OperationResult.Success;
     }
+    
+    /// <inheritdoc />
+    public async Task<OperationResult> DeleteAsync(TEntity entity, CancellationToken cancellationToken = default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+
+        var entityValidationResult = await EntityValidator.ValidateAsync(entity, cancellationToken);
+
+        if (!entityValidationResult.IsValid)
+        {
+            return OperationResult.Failed(entityValidationResult.TransformValidationFailuresToErrors());
+        }
+
+        DbContext.Remove(entity);
+
+        try
+        {
+            await DbContext.SaveChangesAsync(cancellationToken);
+        }
+        catch (Exception)
+        {
+            return OperationResult.Failed(ErrorDescriber.DatabaseDeletionFailure());
+        }
+
+        return OperationResult.Success;
+    }
+    
+    /// <inheritdoc />
+    public async Task<OperationResult> FindByIdAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+
+        if (id == Guid.Empty)
+        {
+            return OperationResult.Failed(ErrorDescriber.ObjectInvalidFailure());
+        }
+
+        try
+        {
+            return OperationResult.SuccessWithPayload(
+                await DbContext.FindAsync<TEntity>(new object[] { id }, cancellationToken));
+        }
+        catch (Exception)
+        {
+            return OperationResult.Failed(ErrorDescriber.DatabaseSelectionFailure());
+        }
+    }
 }
