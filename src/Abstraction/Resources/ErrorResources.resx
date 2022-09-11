@@ -33,4 +33,10 @@
     <data name="DatabaseSelectionFailure" xml:space="preserve">
         <value>There was an error selecting the object from the database.</value>
     </data>
+    <data name="ObjectStateUnmodifiedFailure" xml:space="preserve">
+        <value>The operation failed, because the object state is unmodified.</value>
+    </data>
+    <data name="DatabaseUpdateFailure" xml:space="preserve">
+        <value>There was an error updating the object in the database.</value>
+    </data>
 </root>
