@@ -7,9 +7,6 @@ using Tekoding.KoIdentity.Core.Stores;
 
 namespace Tekoding.KoIdentity.Examples.API.Controllers;
 
-// [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Product))]
-//[ProducesResponseType(StatusCodes.Status404NotFound)]
-
 /// <summary>
 /// Provides user related endpoints.
 /// </summary>

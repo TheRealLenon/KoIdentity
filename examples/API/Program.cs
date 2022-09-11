@@ -9,8 +9,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers().AddNewtonsoftJson();
+
+builder.Services.AddSingleton<RoleValidator>();
+builder.Services.AddTransient<IRoleStore, RoleStore>();
+
 builder.Services.AddSingleton<UserValidator>();
 builder.Services.AddTransient<IUserStore, UserStore>();
+
+
 builder.Services.AddDbContext<DbContext, DatabaseContext>(optionsAction => optionsAction.UseSqlServer(
     Environment.GetEnvironmentVariable("TekodingAzureDEVConnection") ??
     throw new InvalidOperationException()));

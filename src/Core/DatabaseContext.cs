@@ -28,6 +28,8 @@ public class DatabaseContext : DatabaseContext<User>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<User>().BuildUniqueSqlIndex(u => u.Username);
+
+        modelBuilder.Entity<Role>().BuildDefaultSqlEntity().BuildUniqueSqlIndex(r => r.Name);
         
         base.OnModelCreating(modelBuilder);
     }
@@ -45,6 +47,11 @@ public class DatabaseContext : DatabaseContext<User>
         get => MainEntities;
         set => MainEntities = value;
     }
+    
+    /// <summary>
+    /// Gets or sets the <see cref="DbSet{TEntity}"/> of roles.
+    /// </summary>
+    public DbSet<Role> Roles { get; set; }
 
 #nullable restore
 
