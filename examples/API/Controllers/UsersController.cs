@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Tekoding.KoIdentity.Core.Models;
 using Tekoding.KoIdentity.Core.Models.Dtos;
 using Tekoding.KoIdentity.Core.Stores;
+using Tekoding.KoIdentity.Web.Authentications;
 
 namespace Tekoding.KoIdentity.Examples.API.Controllers;
 
@@ -109,6 +110,7 @@ public class UsersController : ControllerBase
     ///     Get /Users/e802511d-7e23-4a19-72cf-08da30926879
     ///
     /// </remarks>
+    [Authorize]
     [HttpGet("{id:guid}")]
     [Consumes(MediaTypeNames.Application.Json)]
     [Produces(MediaTypeNames.Application.Json)]
@@ -195,6 +197,7 @@ public class UsersController : ControllerBase
     ///     DELETE /Users/e802511d-7e23-4a19-72cf-08da30926879
     ///
     /// </remarks>
+    [Authorize("SuperAdministrator")]
     [HttpDelete("{id:guid}")]
     [Consumes(MediaTypeNames.Application.Json)]
     [Produces(MediaTypeNames.Application.Json)]

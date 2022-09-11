@@ -14,13 +14,20 @@ public class JwtMiddleware
         Next = next;
     }
 
-    public async Task Invoke(HttpContext context, IUserStore userStore)
+    public async Task Invoke(HttpContext context, IUserStore userStore, IUserRoleStore userRoleStore)
     {
         var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
-        var selectionResult = await userStore.FindByIdAsync(JwtUtils.ValidateToken(token));
+        var userSelectionResult = await userStore.FindByIdAsync(JwtUtils.ValidateToken(token));
+        var user = userSelectionResult.Payload as User;
+        context.Items["User"] = user;
 
-        context.Items["User"] = selectionResult.Payload as User;
+        if (user is not null)
+        {
+            var rolesSelectionResult =
+                await userRoleStore.GetRolesByUserId(((userSelectionResult.Payload as User)!).Id);
+            context.Items["UserRoles"] = rolesSelectionResult.Payload as List<Role>;
+        }
 
         await Next(context);
     }
