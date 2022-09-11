@@ -1,0 +1,9 @@
+trigger:
+  - main
+  - develop
+
+stages:
+  - stage: SonarCloudAnalyze
+    displayName: 'SonarQube Analyzing Solution'
+    jobs:
+      - template: sonarcloud.yml
