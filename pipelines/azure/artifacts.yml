@@ -1,0 +1,33 @@
+jobs:
+  - job: KoIdentityArtifacts
+    pool:
+      vmImage: windows-2022
+    variables:
+      - group: Tekoding
+    steps:
+      - task: gitversion/setup@0
+        displayName: Install GitVersion
+        inputs:
+          versionSpec: '5.x'
+
+      - task: gitversion/execute@0
+        displayName: Determine Version
+        inputs:
+          useConfigFile: true
+          configFilePath: "GitVersion.yml"
+      - task: DotNetCoreCLI@2
+        displayName: Pack Example
+        inputs:
+          command: pack
+          packagesToPack: '**/*.csproj'
+          packDirectory: '$(Build.ArtifactStagingDirectory)/packages/nuget'
+          versioningScheme: byEnvVar
+          versionEnvVar: GitVersion.NuGetVersion # alternative syntax GITVERSION_NUGETVERSION (the former gets converted into the latter internally)
+      - task: NuGetAuthenticate@0
+        displayName: 'NuGet Authenticate'
+      - task: NuGetCommand@2
+        displayName: 'NuGet push'
+        inputs:
+          command: push
+          publishVstsFeed: 'Tekoding/All'
+          allowPackageConflicts: true
