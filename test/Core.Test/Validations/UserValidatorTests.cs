@@ -8,7 +8,7 @@ namespace Tekoding.KoIdentity.Core.Test.Validations;
 /// <summary>
 /// Provides a set of unit tests that are performed for testing the <see cref="UserValidator"/>
 /// </summary>
-public class UserValidationTests
+public class UserValidatorTests
 {
     /// <summary>
     /// Checking the <see cref="UserValidator"/> to successfully validate an <see cref="User"/> model.
