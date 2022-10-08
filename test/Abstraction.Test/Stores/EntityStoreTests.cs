@@ -53,6 +53,16 @@ public class EntityStoreTests
 
     #endregion
 
+    private void TestValidationResult(OperationResult result)
+    {
+        result.State.Should().BeFalse();
+        result.ErrorCount.Should().Be(1);
+        result.Payload.Should().NotBeNull().And.BeOfType<Error[]>();
+        result.ToString().Should()
+            .ContainAll(nameof(ErrorDescriber.ObjectNullFailure));
+        
+    }
+
     /// <summary>
     /// Checking the <see cref="IEntityStore{TEntity}"/> to indicate a successful operation without any errors, if the
     /// entity was created successful.
@@ -74,6 +84,26 @@ public class EntityStoreTests
         creationResult.ErrorCount.Should().Be(0);
         creationResult.ToString().Should().Contain("Succeeded");
         entityCountAfterCreation.Should().Be(entityCountBeforeCreation + 1);
+    }
+    
+    /// <summary>
+    /// Checking the <see cref="IEntityStore{TEntity}"/> to indicate a failed operation, if the entity was not created,
+    /// because the validation failed due to an <b>ObjectNullFailure</b>.
+    /// </summary>
+    [Test]
+    public async Task CreateAsync_FailsWithObjectNullFailureDueToValidation()
+    {
+        await using var ctx = new DatabaseContext(_dbContextOptions);
+        IEntityStore<BaseEntity> entityStore = new BaseEntityStore(ctx, _baseEntityValidator);
+
+        BaseEntity? entity = null;
+
+        var entityCountBeforeCreation = await ctx.Set<BaseEntity>().CountAsync();
+        var creationResult = await entityStore.CreateAsync(entity!);
+        var entityCountAfterCreation = await ctx.Set<BaseEntity>().CountAsync();
+        
+        TestValidationResult(creationResult);
+        entityCountAfterCreation.Should().Be(entityCountBeforeCreation);
     }
 
     /// <summary>
@@ -124,6 +154,23 @@ public class EntityStoreTests
         updateResult.ErrorCount.Should().Be(0);
         updateResult.ToString().Should().Contain("Succeeded");
         entity.ChangeDate.Should().BeAfter(entity.CreationDate);
+    }
+    
+    /// <summary>
+    /// Checking the <see cref="IEntityStore{TEntity}"/> to indicate a failed operation, if the entity was not updated,
+    /// because the validation failed due to an <b>ObjectNullFailure</b>.
+    /// </summary>
+    [Test]
+    public async Task UpdateAsync_FailsWithObjectNullFailureDueToValidation()
+    {
+        await using var ctx = new DatabaseContext(_dbContextOptions);
+        IEntityStore<BaseEntity> entityStore = new BaseEntityStore(ctx, _baseEntityValidator);
+
+        BaseEntity? entity = null;
+        
+        var updateResult = await entityStore.UpdateAsync(entity!);
+
+        TestValidationResult(updateResult);
     }
 
     /// <summary>
@@ -195,6 +242,26 @@ public class EntityStoreTests
         deletionResult.ErrorCount.Should().Be(0);
         deletionResult.ToString().Should().Contain("Succeeded");
         entityCountAfterDeletion.Should().Be(entityCountBeforeDeletion - 1);
+    }
+    
+    /// <summary>
+    /// Checking the <see cref="IEntityStore{TEntity}"/> to indicate a failed operation, if the entity was not deleted,
+    /// because the validation failed due to an <b>ObjectNullFailure</b>.
+    /// </summary>
+    [Test]
+    public async Task DeleteAsync_FailsWithObjectNullFailureDueToValidation()
+    {
+        await using var ctx = new DatabaseContext(_dbContextOptions);
+        IEntityStore<BaseEntity> entityStore = new BaseEntityStore(ctx, _baseEntityValidator);
+
+        BaseEntity? entity = null;
+
+        var entityCountBeforeDeletion = await ctx.Set<BaseEntity>().CountAsync();
+        var deletionResult = await entityStore.DeleteAsync(entity!);
+        var entityCountAfterDeletion = await ctx.Set<BaseEntity>().CountAsync();
+
+        TestValidationResult(deletionResult);
+        entityCountAfterDeletion.Should().Be(entityCountBeforeDeletion);
     }
 
     /// <summary>
