@@ -23,6 +23,25 @@ public class DatabaseContext : DatabaseContext<User>
         dbContextOptions, databaseSchema)
     {
     }
+    
+    /// <inheritdoc/>
+    internal sealed class DatabaseContextFactory : IDesignTimeDbContextFactory<DatabaseContext>
+    {
+        /// <summary>
+        /// Creates the <see cref="DatabaseContext"/>.
+        /// </summary>
+        /// <param name="args">Optional arguments, which are not used.</param>
+        /// <returns>The <see cref="DatabaseContext"/>.</returns>
+        public DatabaseContext CreateDbContext(string[] args)
+        {
+            var optionsBuilder = new DbContextOptionsBuilder();
+
+            optionsBuilder.UseSqlServer(
+                Environment.GetEnvironmentVariable("TekodingAzureDEVConnection") ??
+                throw new InvalidOperationException());
+            return new DatabaseContext(optionsBuilder.Options);
+        }
+    }
 }
 
 /// <summary>
@@ -51,7 +70,7 @@ public class DatabaseContext<TUser> : Abstraction.DatabaseContext<TUser>
 
         modelBuilder.Entity<Role>().BuildDefaultSqlEntity().BuildUniqueSqlIndex(r => r.Name);
 
-        modelBuilder.Entity<UserRole>().BuildDefaultSqlEntity().BuildUniqueSqlIndex(r =>
+        modelBuilder.Entity<UserRole<TUser>>().BuildDefaultSqlEntity().BuildUniqueSqlIndex(r =>
             new
             {
                 r.UserId, r.RoleId
@@ -82,26 +101,7 @@ public class DatabaseContext<TUser> : Abstraction.DatabaseContext<TUser>
     /// <summary>
     /// Gets or sets the <see cref="DbSet{TEntity}"/> of user roles.
     /// </summary>
-    public DbSet<UserRole> UserRoles { get; set; }
+    public DbSet<UserRole<TUser>> UserRoles { get; set; }
 
 #nullable restore
-
-    /// <inheritdoc/>
-    internal sealed class DatabaseContextFactory : IDesignTimeDbContextFactory<DatabaseContext>
-    {
-        /// <summary>
-        /// Creates the <see cref="DatabaseContext"/>.
-        /// </summary>
-        /// <param name="args">Optional arguments, which are not used.</param>
-        /// <returns>The <see cref="DatabaseContext"/>.</returns>
-        public DatabaseContext CreateDbContext(string[] args)
-        {
-            var optionsBuilder = new DbContextOptionsBuilder();
-
-            optionsBuilder.UseSqlServer(
-                Environment.GetEnvironmentVariable("TekodingAzureDEVConnection") ??
-                throw new InvalidOperationException());
-            return new DatabaseContext(optionsBuilder.Options);
-        }
-    }
 }

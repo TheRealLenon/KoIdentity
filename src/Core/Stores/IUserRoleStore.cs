@@ -7,7 +7,7 @@ namespace Tekoding.KoIdentity.Core.Stores;
 /// <summary>
 /// Represents a persistence store abstraction API for <see cref="UserRole"/>s.
 /// </summary>
-public interface IUserRoleStore : IEntityStore<UserRole>
+public interface IUserRoleStore : IEntityStore<UserRole<User>>
 {
     /// <summary>
     /// Gets all <see cref="Models.Role"/>s from the backing store, if any, currently assigned to the

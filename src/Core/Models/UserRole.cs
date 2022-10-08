@@ -5,7 +5,8 @@ namespace Tekoding.KoIdentity.Core.Models;
 /// <summary>
 /// Provides the default implementation of user roles.
 /// </summary>
-public class UserRole : Entity
+public class UserRole<TUser> : Entity
+    where TUser : User
 {
 #nullable disable
     /// <summary>
@@ -16,7 +17,7 @@ public class UserRole : Entity
     /// <summary>
     /// The <see cref="Models.User"/> this <see cref="UserRole"/> belongs to.
     /// </summary>
-    public User User { get; set; }
+    public TUser User { get; set; }
 
     /// <summary>
     /// The unique identifier of the <see cref="Role"/> this <see cref="UserRole"/> belongs to.

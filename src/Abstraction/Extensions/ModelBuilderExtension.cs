@@ -25,7 +25,7 @@ public static class ModelBuilderExtension
     {
         entityTypeBuilder.HasKey(e => e.Id);
 
-        entityTypeBuilder.ToTable(typeof(TEntity).Name);
+        entityTypeBuilder.ToTable(typeof(TEntity).GetNameWithoutGenericArity());
 
         return entityTypeBuilder;
     }

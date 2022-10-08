@@ -10,7 +10,7 @@ namespace Tekoding.KoIdentity.Core.Stores;
 /// Provides the default implementation of the <see cref="IEntityStore{TEntity}"/> using <see cref="UserRole"/> as
 /// the entity.
 /// </summary>
-public class UserRoleStore : EntityStore<UserRole>, IUserRoleStore
+public class UserRoleStore : EntityStore<UserRole<User>>, IUserRoleStore
 {
     private DbContext DbContext { get; }
 
@@ -37,7 +37,7 @@ public class UserRoleStore : EntityStore<UserRole>, IUserRoleStore
         try
         {
             return OperationResult.SuccessWithPayload(
-                await DbContext.Set<UserRole>().Include(ur => ur.Role)
+                await DbContext.Set<UserRole<User>>().Include(ur => ur.Role)
                     .Where(ur => ur.UserId == userId).Select(ur => ur.Role)
                     .ToListAsync(cancellationToken)
                 );
@@ -61,7 +61,7 @@ public class UserRoleStore : EntityStore<UserRole>, IUserRoleStore
         try
         {
             return OperationResult.SuccessWithPayload(
-                await DbContext.Set<UserRole>().Include(ur => ur.Role)
+                await DbContext.Set<UserRole<User>>().Include(ur => ur.Role)
                     .Where(ur => ur.RoleId == roleId).Select(ur => ur.User)
                     .ToListAsync(cancellationToken)
             );

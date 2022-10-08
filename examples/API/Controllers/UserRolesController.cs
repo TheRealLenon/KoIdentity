@@ -64,7 +64,7 @@ public class UserRolesController: ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> Post(Guid userId, Guid roleId)
     {
-        var userRole = new UserRole
+        var userRole = new UserRole<User>
         {
             UserId = userId,
             RoleId = roleId
@@ -94,7 +94,7 @@ public class UserRolesController: ControllerBase
     /// </remarks>
     [HttpGet]
     [Produces(MediaTypeNames.Application.Json)]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<UserRole>))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<UserRole<User>>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> Get()
     {
@@ -105,7 +105,7 @@ public class UserRolesController: ControllerBase
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
         
-        return Ok(selectionResult.Payload as IEnumerable<UserRole>);
+        return Ok(selectionResult.Payload as IEnumerable<UserRole<User>>);
     }
     
     /// <summary>
@@ -127,9 +127,9 @@ public class UserRolesController: ControllerBase
     [HttpGet("{id:guid}")]
     [Consumes(MediaTypeNames.Application.Json)]
     [Produces(MediaTypeNames.Application.Json)]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserRole))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserRole<User>))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(UserRole))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(UserRole<User>))]
     public async Task<IActionResult> Get(Guid id)
     {
         var selectionResult = await UserRoleStore.FindByIdAsync(id);
@@ -138,12 +138,12 @@ public class UserRolesController: ControllerBase
         {
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
-        if (selectionResult.Payload == null || selectionResult.Payload.GetType() != typeof(UserRole))
+        if (selectionResult.Payload == null || selectionResult.Payload.GetType() != typeof(UserRole<User>))
         {
             return NotFound(id);
         }
 
-        return Ok(selectionResult.Payload as UserRole);
+        return Ok(selectionResult.Payload as UserRole<User>);
     }
     
     /// <summary>
@@ -249,7 +249,7 @@ public class UserRolesController: ControllerBase
     {
         var selectionResult = await UserRoleStore.FindByIdAsync(id);
 
-        if (!selectionResult.State || selectionResult.Payload is not UserRole userRole)
+        if (!selectionResult.State || selectionResult.Payload is not UserRole<User> userRole)
         {
             return NotFound(id);
         }

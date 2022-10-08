@@ -7,7 +7,7 @@ namespace Tekoding.KoIdentity.Core.Validations;
 /// <summary>
 /// Defines a set of validation rules for a particular object for <see cref="UserRole"/>s to be validated.
 /// </summary>
-public class UserRoleValidator : EntityValidator<UserRole>
+public class UserRoleValidator : EntityValidator<UserRole<User>>
 {
     /// <summary>
     /// Creates a new instance of the <see cref="UserRoleValidator"/>.

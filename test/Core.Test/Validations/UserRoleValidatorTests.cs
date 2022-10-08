@@ -11,14 +11,14 @@ namespace Tekoding.KoIdentity.Core.Test.Validations;
 public class UserRoleValidatorTests
 {
     /// <summary>
-    /// Checking the <see cref="UserRoleValidator"/> to successfully validate an <see cref="UserRole"/> model.
+    /// Checking the <see cref="UserRoleValidator"/> to successfully validate an <see cref="UserRole{TUser}"/> model.
     /// </summary>
     [Test]
     public void UserRoleValidator_SuccessfulValidation()
     {
         var userValidator = new UserRoleValidator();
         
-        UserRole userToValidate = new()
+        UserRole<User> userToValidate = new()
         {
             UserId = Guid.NewGuid(),
             RoleId = Guid.NewGuid()
