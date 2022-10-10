@@ -1,8 +1,6 @@
 using System.Net.Mime;
-using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Tekoding.KoIdentity.Core.Models;
-using Tekoding.KoIdentity.Core.Models.Dtos;
 using Tekoding.KoIdentity.Core.Stores;
 using Tekoding.KoIdentity.Web.Authentications;
 

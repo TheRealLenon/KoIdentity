@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Http;
 using Tekoding.KoIdentity.Core.Models;
 using Tekoding.KoIdentity.Core.Stores;
-using Tekoding.KoIdentity.Examples.API.Authentications;
 
 namespace Tekoding.KoIdentity.Web.Authentications;
 

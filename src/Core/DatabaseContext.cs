@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Tekoding.KoIdentity.Abstraction;
 using Tekoding.KoIdentity.Abstraction.Extensions;
 using Tekoding.KoIdentity.Core.Models;
 

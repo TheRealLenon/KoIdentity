@@ -5,7 +5,7 @@ using Tekoding.KoIdentity.Core.Models;
 namespace Tekoding.KoIdentity.Core.Stores;
 
 /// <summary>
-/// Represents a persistence store abstraction API for <see cref="UserRole"/>s.
+/// Represents a persistence store abstraction API for <see cref="UserRole{TUser}"/>s.
 /// </summary>
 public interface IUserRoleStore : IEntityStore<UserRole<User>>
 {

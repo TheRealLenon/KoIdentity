@@ -20,6 +20,7 @@ internal class DatabaseContext : DatabaseContext<BaseEntity>
         base.OnModelCreating(modelBuilder);
     }
     
+    // ReSharper disable once UnusedType.Local
     private sealed class DatabaseContextFactory : IDesignTimeDbContextFactory<DatabaseContext>
     {
         public DatabaseContext CreateDbContext(string[] args)

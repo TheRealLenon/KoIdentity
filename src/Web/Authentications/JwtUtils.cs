@@ -3,7 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Tekoding.KoIdentity.Examples.API.Authentications;
+namespace Tekoding.KoIdentity.Web.Authentications;
 
 public static class JwtUtils
 {
@@ -49,7 +49,7 @@ public static class JwtUtils
 
             return Guid.Parse(secToken.Claims.First(x => x.Type == "id").Value);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return Guid.Empty;
         }

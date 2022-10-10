@@ -5,7 +5,7 @@ using Tekoding.KoIdentity.Core.Models;
 namespace Tekoding.KoIdentity.Core.Validations;
 
 /// <summary>
-/// Defines a set of validation rules for a particular object for <see cref="UserRole"/>s to be validated.
+/// Defines a set of validation rules for a particular object for <see cref="UserRole{TUser}"/>s to be validated.
 /// </summary>
 public class UserRoleValidator : EntityValidator<UserRole<User>>
 {

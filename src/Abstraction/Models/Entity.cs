@@ -9,6 +9,7 @@ public abstract class Entity
     /// <summary>
     /// The unique identifier (id) of the current <see cref="Entity"/>.
     /// </summary>
+    // ReSharper disable once UnassignedGetOnlyAutoProperty
     public Guid Id { get; }
 
     /// <summary>

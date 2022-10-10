@@ -7,7 +7,7 @@ using Tekoding.KoIdentity.Core.Validations;
 namespace Tekoding.KoIdentity.Core.Stores;
 
 /// <summary>
-/// Provides the default implementation of the <see cref="IEntityStore{TEntity}"/> using <see cref="UserRole"/> as
+/// Provides the default implementation of the <see cref="IEntityStore{TEntity}"/> using <see cref="UserRole{TUser}"/> as
 /// the entity.
 /// </summary>
 public class UserRoleStore : EntityStore<UserRole<User>>, IUserRoleStore
@@ -18,7 +18,7 @@ public class UserRoleStore : EntityStore<UserRole<User>>, IUserRoleStore
     /// Creates a new instance of the <see cref="UserStore"/>.
     /// </summary>
     /// <param name="dbContext">The <see cref="DbContext"/> used to access the store.</param>
-    /// <param name="userRoleValidator">The <see cref="UserRoleValidator"/> used for validating an <see cref="UserRole"/>.</param>
+    /// <param name="userRoleValidator">The <see cref="UserRoleValidator"/> used for validating an <see cref="UserRole{TUser}"/>.</param>
     public UserRoleStore(DbContext dbContext, UserRoleValidator userRoleValidator) : base(dbContext, userRoleValidator)
     {
         DbContext = dbContext;

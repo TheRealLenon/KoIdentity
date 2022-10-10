@@ -2,7 +2,7 @@ using System.Net.Mime;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Tekoding.KoIdentity.Core;
-using Tekoding.KoIdentity.Examples.API.Authentications;
+using Tekoding.KoIdentity.Web.Authentications;
 
 namespace Tekoding.KoIdentity.Examples.API.Controllers;
 
@@ -15,6 +15,10 @@ public class AuthenticationController : ControllerBase
 {
     private DatabaseContext DbContext { get; }
 
+    /// <summary>
+    /// Creates a new instance of the <see cref="AuthenticationController"/>.
+    /// </summary>
+    /// <param name="dbContext">The <see cref="DatabaseContext"/> used to access the database.</param>
     public AuthenticationController(DatabaseContext dbContext)
     {
         DbContext = dbContext;

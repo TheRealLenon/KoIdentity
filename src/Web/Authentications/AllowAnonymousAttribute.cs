@@ -1,4 +1,4 @@
-namespace Tekoding.KoIdentity.Examples.API.Authentications;
+namespace Tekoding.KoIdentity.Web.Authentications;
 
 /// <summary>
 /// The authorization Attribute for anonymous access.

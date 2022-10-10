@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Tekoding.KoIdentity.Core.Models;
-using Tekoding.KoIdentity.Examples.API.Authentications;
 
 namespace Tekoding.KoIdentity.Web.Authentications;
 

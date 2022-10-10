@@ -10,23 +10,25 @@ public class UserRole<TUser> : Entity
 {
 #nullable disable
     /// <summary>
-    /// The unique identifier of the <see cref="User"/> this <see cref="UserRole"/> belongs to.
+    /// The unique identifier of the <see cref="User"/> this <see cref="UserRole{TUser}"/> belongs to.
     /// </summary>
-    public Guid UserId { get; set; }
+    public Guid UserId { get; init; }
 
     /// <summary>
-    /// The <see cref="Models.User"/> this <see cref="UserRole"/> belongs to.
+    /// The <see cref="Models.User"/> this <see cref="UserRole{TUser}"/> belongs to.
     /// </summary>
-    public TUser User { get; set; }
+    // ReSharper disable once UnusedAutoPropertyAccessor.Local
+    public TUser User { get; private set; }
 
     /// <summary>
-    /// The unique identifier of the <see cref="Role"/> this <see cref="UserRole"/> belongs to.
+    /// The unique identifier of the <see cref="Role"/> this <see cref="UserRole{TUser}"/> belongs to.
     /// </summary>
-    public Guid RoleId { get; set; }
+    public Guid RoleId { get;  init; }
 
     /// <summary>
-    /// The <see cref="Models.Role"/> this <see cref="UserRole"/> belongs to.
+    /// The <see cref="Models.Role"/> this <see cref="UserRole{TUser}"/> belongs to.
     /// </summary>
-    public Role Role { get; set; }
+    // ReSharper disable once UnusedAutoPropertyAccessor.Local
+    public Role Role { get; private set; }
 #nullable enable
 }

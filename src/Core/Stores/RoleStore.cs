@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Tekoding.KoIdentity.Abstraction.Stores;
-using Tekoding.KoIdentity.Abstraction.Validations;
 using Tekoding.KoIdentity.Core.Models;
 using Tekoding.KoIdentity.Core.Validations;
 
