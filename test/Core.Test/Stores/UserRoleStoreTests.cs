@@ -18,7 +18,7 @@ public class UserRoleStoreTests
 #nullable disable
 
     private readonly UserRoleValidator _userRoleValidator = new();
-    private readonly UserValidator _userValidator = new();
+    private readonly UserValidator<User> _userValidator = new();
     private readonly RoleValidator _roleValidator = new();
 
     private readonly DbContextOptions _dbContextOptions = new DbContextOptionsBuilder().UseSqlServer(

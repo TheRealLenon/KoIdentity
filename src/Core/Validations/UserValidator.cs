@@ -7,10 +7,11 @@ namespace Tekoding.KoIdentity.Core.Validations;
 /// <summary>
 /// Defines a set of validation rules for a particular object for <see cref="User"/>s to be validated.
 /// </summary>
-public class UserValidator : EntityValidator<User>
+public class UserValidator<TUser> : EntityValidator<TUser>
+    where TUser : User
 {
     /// <summary>
-    /// Creates a new instance of the <see cref="UserValidator"/>.
+    /// Creates a new instance of the <see cref="UserValidator{TUser}"/>.
     /// </summary>
     public UserValidator()
     {

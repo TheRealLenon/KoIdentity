@@ -15,7 +15,7 @@ public class UserStoreTests
 {
 #nullable disable
     
-    private readonly UserValidator _userValidator = new();
+    private readonly UserValidator<User> _userValidator = new();
     private readonly DbContextOptions _dbContextOptions = new DbContextOptionsBuilder().UseSqlServer(
         Environment.GetEnvironmentVariable("TekodingAzureDEVConnection") ??
     throw new InvalidOperationException()).Options;

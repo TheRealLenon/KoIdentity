@@ -2,6 +2,7 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Tekoding.KoIdentity.Core;
+using Tekoding.KoIdentity.Core.Models;
 using Tekoding.KoIdentity.Core.Stores;
 using Tekoding.KoIdentity.Core.Validations;
 using Tekoding.KoIdentity.Web.Authentications;
@@ -17,7 +18,7 @@ builder.Services.AddTransient<IUserRoleStore, UserRoleStore>();
 builder.Services.AddSingleton<RoleValidator>();
 builder.Services.AddTransient<IRoleStore, RoleStore>();
 
-builder.Services.AddSingleton<UserValidator>();
+builder.Services.AddSingleton<UserValidator<User>>();
 builder.Services.AddTransient<IUserStore, UserStore>();
 
 

@@ -14,8 +14,8 @@ public class UserStore : EntityStore<User>, IUserStore
     /// Creates a new instance of the <see cref="UserStore"/>.
     /// </summary>
     /// <param name="dbContext">The <see cref="DbContext"/> used to access the store.</param>
-    /// <param name="userValidator">The <see cref="UserValidator"/> used for validating an <see cref="User"/>.</param>
-    public UserStore(DbContext dbContext, UserValidator userValidator) : base(dbContext, userValidator)
+    /// <param name="userValidator">The <see cref="UserValidator{TUser}"/> used for validating an <see cref="User"/>.</param>
+    public UserStore(DbContext dbContext, UserValidator<User> userValidator) : base(dbContext, userValidator)
     {
     }
 }
